@@ -1,26 +1,33 @@
 # vampire-survivor-2d
 
-这是一个 Unity 2D 像素风肉鸽原型的初始脚手架仓库。
+这是一个 Unity 2D 像素风肉鸽原型的仓库（开箱即玩）。
 
-目标：提供一个可以在本地打开、快速上手的 Unity 项目结构与主要脚本；占位素材可通过提供的脚本一键下载。
+已完成：
+- 核心玩法脚本（玩家、敌人、子弹、刷怪、拾取、全局管理）
+- 占位素材下载脚本（图片与音频）
+- 编辑器脚本：SceneBuilder（可在 Unity Editor -> Tools -> Build Starter Scene 一键生成场景与预制体）
+- 简单 UI 管理脚本（UIManager）
 
-说明（简化）
-- 推荐 Unity 版本：2021.3 LTS
-- 打开步骤：
-  1. 在 Unity Hub 新建（或打开）一个 2D 项目，Unity 版本选择 2021.3.x。
-  2. 将本仓库克隆或下载 ZIP 并把 Assets 文件夹内容复制到你的 Unity 项目根目录下（覆盖提示请确认）。
-  3. 在 Unity 中打开 Scene（Assets/Scenes/Main.unity） — 如果你没有看到场景，请在 Unity 中创建一个新场景并保存为 Assets/Scenes/Main.unity，然后按 README 中的指示手动添加对象（或运行下方脚本帮助创建）。
-  4. 在 Unity 编辑器中运行（Play）进行试玩。
+快速开始（Windows，或其他平台）
+1) 安装 Unity（推荐 2021.3 LTS）并打开 Unity Hub。
+2) 克隆或下载本仓库：
+   git clone https://github.com/601644419-sudo/vampire-survivor-2d.git
+3) 进入项目根目录后，先下载占位贴图与音效：
+   - 在 PowerShell (Windows): powershell -ExecutionPolicy Bypass -File .\Assets\Tools\download_assets.ps1
+   - 在 Bash (macOS/Linux): bash Assets/Tools/download_assets.sh
+   - 下载占位音效：
+     - PowerShell: powershell -ExecutionPolicy Bypass -File .\Assets\Tools\download_audio.ps1
+     - Bash: bash Assets/Tools/download_audio.sh
+4) 在 Unity Hub 中点击 Add，选择项目文件夹并打开。
+5) 在 Unity 的菜单栏选择 Tools -> Build Starter Scene（该菜单由 Assets/Editor/SceneBuilder.cs 提供），脚本会自动生成场景、预制体并保存为 Assets/Scenes/Main.unity。
+6) 在 Project 窗口打开 Assets/Scenes/Main.unity 并按 Play 试玩。
 
-快速获取占位素材
-- 我在 `Assets/Tools/download_assets.ps1`（Windows PowerShell）和 `Assets/Tools/download_assets.sh`（Linux/macOS）里放了脚本，运行后会下载占位图片到 `Assets/Textures/`。
+说明：
+- SceneBuilder 会尝试把 Assets/Textures 下的 PNG 设为 Sprite 类型并生成 Player/Enemy/Projectile/Item 的预制体以及简单的 UI Canvas。如果你不希望自动化，请手动创建场景并按脚本中的说明挂载组件。
+- 玩法与平衡都是示例；你可以在 Assets/Scripts 中修改 PlayerController、Enemy、EnemySpawner、ItemPickup、GameManager 等脚本来自定义数值和道具。
 
-下一个步骤
-- 我已上传核心脚本（玩家、敌人、子弹、刷新器、道具与保存管理）。你可以先导入占位素材并在 Unity 中根据 README 创建 GameObjects（或告诉我，我可以继续把完整的场景文件和预制体上传）。
+解锁与保存：
+- GameManager 提供了 SaveUnlock/IsUnlocked/SaveBestTime 的示例方法，使用 PlayerPrefs 本地保存。
 
-如果你希望我继续：
-- 我可以把完整的 Unity 场景（Main.unity）、预制体（玩家、敌人、子弹、道具）以及小型音效/音乐上传，使项目开箱即玩；但那需要我生成并上传二进制资源（我可以把占位 PNG/音频文件通过下载脚本注入，或直接把小文件上传）。
-
----
-
-README: 接下来我会把如何在 Unity 中快速搭建场景的步骤写清楚，已在仓库里。
+下一步：
+- 我可以继续添加更多道具、角色解锁界面、按键提示、音效触发和示例角色数据表，并且整理一个用于生成 Windows 可执行的详细图文打包指南。如果你希望我继续，我会把更多示例道具与 UI 功能补齐并 push。 
