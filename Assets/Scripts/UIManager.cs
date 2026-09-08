@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-// 简单 UI 管理：显示生存时间、敌人击杀数、已拾取道具（需要在场景中创建 Canvas 或调用 SceneBuilder 来生成）
+// 简单 UI 管理：显示生存时间、敌人击杀数、已拾取道具
 public class UIManager : MonoBehaviour
 {
     private Text timeText;
@@ -58,24 +58,11 @@ public class UIManager : MonoBehaviour
         }
         if (killsText != null)
         {
-            killsText.text = $"击杀数: {GetKills()}";
+            killsText.text = $"击杀数: {GameManager.Instance?.GetKills() ?? 0}";
         }
         if (pickupsText != null)
         {
-            pickupsText.text = GetPickupsText();
+            pickupsText.text = GameManager.Instance != null ? GameManager.Instance.GetPickupsText() : "拾取: -";
         }
-    }
-
-    // 暂时使用 PlayerPrefs 或 GameManager 方法获取击杀数（示例）
-    int GetKills()
-    {
-        // 目前 GameManager 未暴露 kills，但我们可从 PlayerPrefs 或扩展 GameManager 获取
-        return 0;
-    }
-
-    string GetPickupsText()
-    {
-        // 这个示例只是占位，更多细节可在 GameManager 中维护 pickups 列表并在此显示
-        return "拾取: -";
     }
 }
